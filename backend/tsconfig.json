@@ -1,14 +1,15 @@
 {
-    "compilerOptions": {
-      "target": "ES6",
-      "module": "commonjs",
-      "outDir": "./dist",
-      "rootDir": "./src",
-      "strict": true,
-      "esModuleInterop": true,
-      "skipLibCheck": true,
-      "forceConsistentCasingInFileNames":  
-  
-   true
-    }
-  }
+  "compilerOptions": {
+    "target": "ESNext", // Alvo para a versão mais recente do ECMAScript
+    "module": "ESNext", // Usar o sistema de módulos ESNext
+    "outDir": "./dist", // Diretório de saída para arquivos compilados
+    "rootDir": "./src", // Diretório raiz dos arquivos de origem
+    "strict": true, // Ativar todas as verificações estritas
+    "esModuleInterop": true, // Habilitar interoperabilidade entre CommonJS e ES Modules
+    "skipLibCheck": true, // Ignorar verificação de tipos em arquivos de declaração
+    "forceConsistentCasingInFileNames": true, // Forçar consistência no uso de maiúsculas e minúsculas nos nomes de arquivos
+    "moduleResolution": "node" // Resolução de módulos no estilo Node.js
+  },
+  "include": ["src/**/*"], // Incluir todos os arquivos na pasta src
+  "exclude": ["node_modules"] // Excluir node_modules da compilação
+}
