@@ -16,13 +16,16 @@
   "devDependencies": {
     "@types/express": "^5.0.0",
     "@types/jest": "^29.5.13",
+    "@types/pdf-parse": "^1.1.4",
     "@types/supertest": "^6.0.2",
+    "dotenv": "^16.4.5",
     "express": "^4.21.1",
     "jest": "^29.7.0",
     "pg": "^8.13.0",
     "sequelize": "^6.37.4",
     "sequelize-cli": "^6.6.2",
     "supertest": "^7.0.0",
+    "suppress-experimental-warnings": "^2.0.0",
     "ts-jest": "^29.2.5",
     "ts-node": "^10.9.2",
     "typescript": "^5.6.3"
@@ -30,7 +33,7 @@
   "type": "module",
   "exports": "./src/index.ts",
   "dependencies": {
-    "dotenv": "^16.4.5",
-    "suppress-experimental-warnings": "^2.0.0"
+    "body-parser": "^1.20.3",
+    "pdf-parse": "^1.1.1"
   }
 }

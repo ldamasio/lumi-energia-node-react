@@ -8,6 +8,10 @@ Para a realização deste desafio, utilizamos as seguintes tecnologias e prátic
 - Typescript, Node.js (com Express), React e PostgreSQL.
 - ORM Sequelize para facilitar a interação com o banco de dados PostgreSQL.
 
+# Parser
+
+os campos: id, número do cliente, mês de referência, energia eletrica - quantidade de kwh, energia eletrica - valor (R$), energia sceee sem icms - kwh, energia sceee sem icme - valor (R$), energia compensada - kwh, energia compensada - valor (R$), contribuicao iluminação pública municipal (cosip)
+
 # Testes
 
 # Características Técnicas
