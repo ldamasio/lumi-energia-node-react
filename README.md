@@ -3,7 +3,7 @@ Este projeto extrai dados de faturas de energia elétrica em PDF, armazena esses
 
 # Tecnologias utilizadas
 
-Para a realização deste desafio, pretendo utilizar as seguintes tecnologias e práticas:
+Para a realização deste desafio, utilizamos as seguintes tecnologias e práticas:
 
 - Typescript, Node.js (com Express), React e PostgreSQL.
 - ORM Sequelize para facilitar a interação com o banco de dados PostgreSQL.
@@ -18,4 +18,7 @@ Versão do Node: 18
 
 # CI/CD
 
+# Frontend
+
+https://www.labs-lumi.com.br/#sobre-nos
 

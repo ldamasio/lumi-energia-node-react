@@ -10,6 +10,13 @@
     "forceConsistentCasingInFileNames": true, // Forçar consistência no uso de maiúsculas e minúsculas nos nomes de arquivos
     "moduleResolution": "node" // Resolução de módulos no estilo Node.js
   },
-  "include": ["src/**/*"], // Incluir todos os arquivos na pasta src
-  "exclude": ["node_modules"] // Excluir node_modules da compilação
+  "ts-node": {
+    "esm": true
+  },
+  "include": [
+    "src/**/*"
+  ], // Incluir todos os arquivos na pasta src
+  "exclude": [
+    "node_modules"
+  ] // Excluir node_modules da compilação
 }

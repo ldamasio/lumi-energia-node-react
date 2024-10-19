@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "jest",
-    "dev": "nodemon src/index.ts",
+    "dev": "node --loader ts-node/esm --require=suppress-experimental-warnings src/index.ts",
     "build": "tsc",
     "start": "nodemon src/index.ts",
     "prod": "node dist/index.js"
@@ -19,7 +19,6 @@
     "@types/supertest": "^6.0.2",
     "express": "^4.21.1",
     "jest": "^29.7.0",
-    "nodemon": "^3.1.7",
     "pg": "^8.13.0",
     "sequelize": "^6.37.4",
     "sequelize-cli": "^6.6.2",
@@ -31,6 +30,7 @@
   "type": "module",
   "exports": "./src/index.ts",
   "dependencies": {
-    "dotenv": "^16.4.5"
+    "dotenv": "^16.4.5",
+    "suppress-experimental-warnings": "^2.0.0"
   }
 }
