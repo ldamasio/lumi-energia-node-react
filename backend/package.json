@@ -7,7 +7,6 @@
     "test": "jest",
     "dev": "node --loader ts-node/esm --require=suppress-experimental-warnings src/index.ts",
     "build": "tsc",
-    "start": "nodemon src/index.ts",
     "prod": "node dist/index.js"
   },
   "keywords": [],
@@ -16,7 +15,9 @@
   "devDependencies": {
     "@types/express": "^5.0.0",
     "@types/jest": "^29.5.13",
+    "@types/node": "^22.7.7",
     "@types/pdf-parse": "^1.1.4",
+    "@types/sequelize": "^4.28.20",
     "@types/supertest": "^6.0.2",
     "dotenv": "^16.4.5",
     "express": "^4.21.1",

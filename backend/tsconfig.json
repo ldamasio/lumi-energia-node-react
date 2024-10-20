@@ -15,7 +15,7 @@
   },
   "include": [
     "src/**/*"
-  ], // Incluir todos os arquivos na pasta src
+, "src/database.ts"  ], // Incluir todos os arquivos na pasta src
   "exclude": [
     "node_modules"
   ] // Excluir node_modules da compilação
