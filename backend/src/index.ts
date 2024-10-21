@@ -1,7 +1,6 @@
 // src/index.ts
 import express from 'express';
 import bodyParser from 'body-parser';
-import usersRouter from './routes/users';
 import faturasRouter from './routes/faturas';
 
 const app = express();
@@ -14,9 +13,6 @@ app.get('/', (req, res) => {
     res.send('Hello, World!');
 });
 
-// app.post('/api/contas', ContasController.createConta);
-
-app.use('/users', usersRouter);
 app.use('/faturas', faturasRouter);
 
 app.listen(port, () => {
