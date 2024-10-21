@@ -1,20 +1,15 @@
-import sequelize from '../database';
-import { Sequelize } from 'sequelize';
+// __tests__/db.test.ts
+import { PrismaClient } from '@prisma/client';
 
-describe('Database Connection', () => {
-    beforeAll(async () => {
-        try {
-            await sequelize.authenticate();
-        } catch (error) {
-            throw new Error('Unable to connect to the database: ' + error);
-        }
-    });
+const prisma = new PrismaClient();
 
-    it('should connect to the database successfully', async () => {
-        expect(sequelize).toBeInstanceOf(Sequelize);
-    });
+describe('Prisma Database Connection', () => {
+  afterAll(async () => {
+    await prisma.$disconnect();
+  });
 
-    afterAll(async () => {
-        await sequelize.close();
-    });
+  it('should connect to the database', async () => {
+    const result = await prisma.fatura.findMany(); // Tente buscar faturas ou outra operação simples.
+    expect(result).toBeDefined(); // Verifica se a conexão retornou um resultado definido.
+  });
 });

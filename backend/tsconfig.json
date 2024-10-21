@@ -2,20 +2,30 @@
   "compilerOptions": {
     "target": "ESNext", // Alvo para a versão mais recente do ECMAScript
     "module": "ESNext", // Usar o sistema de módulos ESNext
+    "moduleResolution": "node",
     "outDir": "./dist", // Diretório de saída para arquivos compilados
     "rootDir": "./src", // Diretório raiz dos arquivos de origem
     "strict": true, // Ativar todas as verificações estritas
     "esModuleInterop": true, // Habilitar interoperabilidade entre CommonJS e ES Modules
     "skipLibCheck": true, // Ignorar verificação de tipos em arquivos de declaração
+    "allowSyntheticDefaultImports": true, // Permite importar o default export de um módulo sem usar default
     "forceConsistentCasingInFileNames": true, // Forçar consistência no uso de maiúsculas e minúsculas nos nomes de arquivos
-    "moduleResolution": "node" // Resolução de módulos no estilo Node.js
+    "baseUrl": "./",
+    "paths": {
+      "*": [
+        "node_modules/*",
+        "src/types/*"
+      ]
+    }
   },
   "ts-node": {
+    "experimentalSpecifierResolution": "node",
+    "transpileOnly": true,
     "esm": true
   },
   "include": [
     "src/**/*"
-, "src/database.ts"  ], // Incluir todos os arquivos na pasta src
+  ], // Incluir todos os arquivos na pasta src
   "exclude": [
     "node_modules"
   ] // Excluir node_modules da compilação

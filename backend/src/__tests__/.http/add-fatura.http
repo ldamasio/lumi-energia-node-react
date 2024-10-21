@@ -1,0 +1,20 @@
+### Criar uma nova fatura
+POST http://localhost:3000/faturas/ HTTP/1.1
+Content-Type: application/json
+
+{
+  "empresa": "Energia S/A",
+  "nomeCliente": "João da Silva",
+  "numeroCliente": "123456789",
+  "instalacao": "Rua das Flores, 123",
+  "mesReferencia": "2024-10",
+  "vencimento": "2024-11-01T00:00:00Z",
+  "valorAPagar": 150.75,
+  "energiaEletricaQtd": 300,
+  "energiaEletricaValor": 120.50,
+  "energiaSCEESICMSQtd": 50,
+  "energiaSCEESICMSValor": 30.25,
+  "energiaCompensadaQtd": 20,
+  "energiaCompensadaValor": 0,
+  "cosipValor": 0.50
+}

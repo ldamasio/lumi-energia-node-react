@@ -1,0 +1,20 @@
+
+POST http://localhost:3000/api/contas HTTP/1.1
+Content-Type: application/json
+
+{
+  "numeroCliente": 123456,
+  "numeroInstalacao": 789012,
+  "vencimento": "2024-10-30",
+  "valorAPagar": 150.75,
+  "mesReferencia": "2024-10",
+  "energiaEletricaKwh": 300.50,
+  "energiaEletricaValor": 75.00,
+  "energiaSCEESemICMSKwh": 250.00,
+  "energiaSCEESemICMSValor": 60.00,
+  "energiaCompensadaKwh": 50.00,
+  "energiaCompensadaValor": 15.00,
+  "cosip": 5.00
+}
+
+
