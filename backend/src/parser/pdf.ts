@@ -1,18 +1,53 @@
 import fs from 'fs';
 import pdf from 'pdf-parse';
+import path from 'path';
+import axios from 'axios';
+
+function formatValor(valor?: string | null): string {
+  return valor?.replace(',', '.') || '';
+}
+
+async function enviarFaturaParaAPI(fatura: any) {
+  try {
+    const response = await axios.post('http://localhost:3000/faturas/', fatura);
+    console.log('Fatura enviada com sucesso:', response.data);
+  } catch (error) {
+    if (error instanceof axios.AxiosError) {
+      console.error('Erro de rede:', error);
+    } else {
+      console.error('Erro inesperado:', error);
+    }
+  }
+}
 
 async function processPDF(filePath: string): Promise<void> {
   try {
     const dataBuffer = fs.readFileSync(filePath);
     const data = await pdf(dataBuffer);
 
-    console.log(data.text);
-
     const fatura = extrairFatura(data.text);
-    console.log('Dados da Fatura:', fatura);
-
     const energiaDados = extrairEnergiaDados(data.text);
-    console.log('Dados de Energia Elétrica:', energiaDados);
+
+    // Mapeando os dados para o formato da API
+    const dadosParaApi = {
+      empresa: fatura.empresa,
+      nomeCliente: fatura.nomeCliente,
+      numeroCliente: fatura.numeroCliente,
+      instalacao: fatura.instalacao,
+      mesReferencia: fatura.mesReferencia,
+      vencimento: fatura.vencimento,
+      valorAPagar: formatValor(fatura.valorAPagar),
+      energiaEletricaQtd: formatValor(energiaDados.find(e => e.tipo === 'Energia Elétrica')?.quantidade),
+      energiaEletricaValor: formatValor(energiaDados.find(e => e.tipo === 'Energia Elétrica')?.valor),
+      energiaSCEESICMSQtd: formatValor(energiaDados.find(e => e.tipo === 'Energia SCEE s/ ICMS')?.quantidade),
+      energiaSCEESICMSValor: formatValor(energiaDados.find(e => e.tipo === 'Energia SCEE s/ ICMS')?.valor),
+      energiaCompensadaQtd: formatValor(energiaDados.find(e => e.tipo === 'Energia compensada GD I')?.quantidade),
+      energiaCompensadaValor: formatValor(energiaDados.find(e => e.tipo === 'Energia compensada GD I')?.valor),
+      cosipValor: formatValor(energiaDados.find(e => e.tipo === 'Contrib Ilum Publica Municipal')?.valor)
+    };
+
+    // Enviando os dados para a API
+    await enviarFaturaParaAPI(dadosParaApi);
 
   } catch (err) {
     console.error('Erro ao processar o PDF:', err);
@@ -42,6 +77,7 @@ function extrairFatura(texto: string): { empresa: string | null, nomeCliente: st
       mesReferencia = partesVencimento[0] || null; // Captura a data de vencimento
       vencimento = partesVencimento[1] || null; // Captura a data de vencimento
       valorAPagar = partesVencimento[2] || null; // Captura o valor a pagar
+      
     } else if (/(Janeiro|Fevereiro|Março|Abril|Maio|Junho|Julho|Agosto|Setembro|Outubro|Novembro|Dezembro)\//.test(linhas[i].trim())) {
       // A linha seguinte deve ser o nome do cliente
       nomeCliente = linhas[i + 1]?.trim() || null; // Captura o nome do cliente na linha seguinte
@@ -103,5 +139,25 @@ function extrairEnergiaDados(texto: string): Array<{ tipo: string, quantidade: s
   return dadosEnergia; // Retorna um array com os dados encontrados
 }
 
+async function processAllPDFs(directory: string) {
+  const files = await fs.promises.readdir(directory, { withFileTypes: true });
 
-processPDF('./src/services/3001116735-01-2024.pdf');
+  for (const file of files) {
+    const filePath = path.join(directory, file.name);
+
+    if (file.isDirectory())  
+
+ {
+      // Se for um diretório, chama recursivamente a função para processar os arquivos dentro dele
+      await processAllPDFs(filePath);
+    } else if (path.extname(filePath) === '.pdf') {
+      // Se for um arquivo PDF, processa o arquivo
+      console.log(`Processando arquivo: ${filePath}`);
+      await processPDF(filePath);
+    }
+  }
+}
+
+// Chamada da função para processar todos os PDFs a partir do diretório 'faturas'
+processAllPDFs('./src/parser/faturas');
+
