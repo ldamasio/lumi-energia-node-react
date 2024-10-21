@@ -20,7 +20,7 @@ async function enviarFaturaParaAPI(fatura: any) {
   }
 }
 
-async function processPDF(filePath: string): Promise<void> {
+export async function processPDF(filePath: string): Promise<void> {
   try {
     const dataBuffer = fs.readFileSync(filePath);
     const data = await pdf(dataBuffer);
@@ -55,7 +55,7 @@ async function processPDF(filePath: string): Promise<void> {
 }
 
 // Função para extrair informações adicionais como número do cliente, instalação, vencimento e valor a pagar
-function extrairFatura(texto: string): { empresa: string | null, nomeCliente: string | null, numeroCliente: string | null, instalacao: string | null, mesReferencia: string | null, vencimento: string | null, valorAPagar: string | null } {
+export function extrairFatura(texto: string): { empresa: string | null, nomeCliente: string | null, numeroCliente: string | null, instalacao: string | null, mesReferencia: string | null, vencimento: string | null, valorAPagar: string | null } {
   const linhas = texto.split('\n');
 
   let empresa: string | null = null;

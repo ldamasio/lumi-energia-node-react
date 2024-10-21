@@ -12,7 +12,7 @@ API: https://lumi-api-v1.leandrodamasio.com/
 Para a realização deste desafio, utilizamos as seguintes tecnologias e práticas:
 
 - Typescript, Node.js (com Express), React e PostgreSQL.
-- ORM Sequelize para facilitar a interação com o banco de dados PostgreSQL.
+- ORM Prisma para facilitar a interação com o banco de dados PostgreSQL e pela compatibilidade com Typescript.
 - React e Typescript para criar o dashboard
 
 ### Parser
@@ -22,8 +22,6 @@ Para rodar o parser manualmente em ambiente de desenvolvimento, utilizar o segui
 ```
 node --loader ts-node/esm --require=suppress-experimental-warnings src/services/pdf.ts
 ```
-
-os campos: id, número do cliente, numero da istalação, vencimento, valor a pagar, mês de referência, energia eletrica - quantidade de kwh, energia eletrica - valor (R$), energia SCEE s/ ICMS - kwh, energia sceee sem icme - valor (R$), energia compensada - kwh, energia compensada - valor (R$), contribuicao iluminação pública municipal (cosip)
 
 ### Testes
 
@@ -40,17 +38,12 @@ Para escrever os testes, utilizamos a biblioteca Jest. Os testes foram escritos 
 
 Versão do Node: 18
 
-o ESNext oferece um conjunto de ferramentas e recursos que podem ajudar você a criar aplicações JavaScript mais modernas, eficientes e robustas.
+Utilizamos o ESNext por oferecer um conjunto de ferramentas e recursos que ajudam a criar aplicações JavaScript mais modernas, eficientes e robustas.
 
-A utilização de CommonJS para configurar o Sequelize e criar migrações em um projeto ESNext é uma prática comum devido à compatibilidade com ferramentas existentes, à estabilidade do ecossistema CJS e à possibilidade de realizar uma migração gradual para ES Modules. Ao entender esses motivos, você poderá tomar decisões mais informadas sobre a arquitetura do seu projeto e escolher a abordagem mais adequada para cada parte do seu código.
+### Rotas
 
-# Documentação
-
-# CI/CD
-
-
-
-# Frontend
-
-https://www.labs-lumi.com.br/#sobre-nos
-
+POST /faturas: Cria uma nova fatura. Recebe um objeto JSON no corpo da requisição contendo os dados da fatura, como empresa, cliente, valor, data de vencimento e detalhes do consumo de energia. Retorna a fatura criada.
+GET /faturas: Retorna uma lista com todas as faturas cadastradas no sistema.
+GET /faturas/:id: Busca uma fatura específica pelo seu ID. Retorna a fatura encontrada ou um erro 404 caso não exista.
+PUT /faturas/:id: Atualiza os dados de uma fatura existente. Recebe um objeto JSON no corpo da requisição com as novas informações.
+DELETE /faturas/:id: Exclui uma fatura específica pelo seu ID.
